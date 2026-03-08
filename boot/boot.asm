@@ -11,7 +11,7 @@ SECTION .multiboot
     dd -(0x1BADB002 + 0x00000003) ; Checksum
 
 SECTION .text
-    extern kernel_main     ; C kernel entry
+    extern kernel_entry     ; C kernel entry
     global start
 
 start:
@@ -21,7 +21,7 @@ start:
 
     push eax               ; Multiboot magic number
     push ebx               ; Multiboot info structure
-    call kernel_main
+    call kernel_entry
 
 hang:
     hlt
