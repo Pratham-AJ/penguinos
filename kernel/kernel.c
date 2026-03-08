@@ -15,16 +15,21 @@ static void vga_put(char c, uint8_t color)
     if (c == '\n') {
         cursor_x = 0;
         cursor_y++;
-        return;
+    } else {
+        uint16_t index = cursor_y * VGA_WIDTH + cursor_x;
+        vga_buffer[index] = ((uint16_t)color << 8) | c;
+
+        cursor_x++;
     }
 
-    uint16_t index = cursor_y * VGA_WIDTH + cursor_x;
-    vga_buffer[index] = ((uint16_t)color << 8) | c;
-
-    cursor_x++;
     if (cursor_x >= VGA_WIDTH) {
         cursor_x = 0;
         cursor_y++;
+    }
+
+
+    if (cursor_y >= VGA_HEIGHT) {
+        cursor_y = 0;
     }
 }
 
@@ -41,7 +46,7 @@ void kernel_main(uint32_t magic, uint32_t addr)
     (void)magic;
     (void)addr;
 
-    print("3BIT OS BOOTED SUCCESSFULLY\n");
+    print("PENGUIN OS BOOTED SUCCESSFULLY\n");
     print("Running in 32-bit Protected Mode\n");
 
     while (1) {
