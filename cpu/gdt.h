@@ -1,23 +1,22 @@
 #ifndef GDT_H
 #define GDT_H
 
-// Structure for a GDT entry
+#include <stdint.h>
+
 struct gdt_entry {
-    unsigned short limit_low;  // Lower 16 bits of the limit
-    unsigned short base_low;   // Lower 16 bits of the base
-    unsigned char base_middle;  // Next 8 bits of the base
-    unsigned char access;       // Access flags
-    unsigned char granularity;  // Granularity flags
-    unsigned char base_high;    // Last 8 bits of the base
-};
+    uint16_t limit_low;
+    uint16_t base_low;
+    uint8_t base_middle;
+    uint8_t access;
+    uint8_t granularity;
+    uint8_t base_high;
+} __attribute__((packed));
 
-// Structure for GDT pointer
 struct gdt_ptr {
-    unsigned short limit;       // Limit of GDT
-    unsigned int base;          // Base address of GDT
-};
+    uint16_t limit;
+    uint32_t base;
+} __attribute__((packed));
 
-// Function to initialize the GDT
-void gdt_init();
+void gdt_init(void);
 
-#endif // GDT_H
+#endif
