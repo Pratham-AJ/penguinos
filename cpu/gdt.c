@@ -40,7 +40,7 @@ static void gdt_set_gate(
     gdt[num].limit_low   = (limit & 0xFFFF);
     gdt[num].granularity = (limit >> 16) & 0x0F;
 
-    gdt[num].granularity |= gran & 0xF0;
+    gdt[num].granularity |= (gran & 0xF0);
     gdt[num].access      = access;
 }
 
