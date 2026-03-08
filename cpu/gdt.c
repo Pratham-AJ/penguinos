@@ -1,6 +1,4 @@
-// ================================
-// gdt.c - Global Descriptor Table
-// ================================
+
 
 #include <stdint.h>
 #include "gdt.h"
