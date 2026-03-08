@@ -1,4 +1,4 @@
-ENTRY(_start)
+ENTRY(start)
 
 SECTIONS
 {
@@ -26,3 +26,4 @@ SECTIONS
         *(.bss*)
     }
 }
+
