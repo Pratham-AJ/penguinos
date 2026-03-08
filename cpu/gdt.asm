@@ -1,6 +1,9 @@
+BITS 32
+
 global gdt_flush
 
 gdt_flush:
+
     mov eax, [esp+4]
     lgdt [eax]
 
@@ -12,5 +15,6 @@ gdt_flush:
     mov ss, ax
 
     jmp 0x08:.flush
+
 .flush:
     ret
