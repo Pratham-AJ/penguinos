@@ -1,0 +1,33 @@
+PENGUINOS BUILD REQUIREMENTS
+=============================
+
+Host OS:  Ubuntu 24.04 LTS (or similar Debian-based)
+Target:   i386 (32-bit x86), freestanding
+
+REQUIRED PACKAGES
+-----------------
+  sudo apt-get install nasm gcc-multilib binutils grub-pc-bin xorriso
+
+  - nasm          : assembler for all .asm files
+  - gcc-multilib  : provides -m32 support on x86_64 hosts
+  - binutils      : ld with -m elf_i386 support
+  - grub-pc-bin   : grub-mkrescue for ISO generation
+  - xorriso       : ISO creation backend used by grub-mkrescue
+
+OPTIONAL (cross-compiler for stricter builds)
+---------------------------------------------
+  If you want a dedicated i686-elf cross-compiler (recommended for
+  production OS work), follow the OSDev wiki cross-compiler guide:
+    https://wiki.osdev.org/GCC_Cross-Compiler
+
+  Set CC = i686-elf-gcc and AS = nasm in the Makefile.
+
+BUILD
+-----
+  make            → builds build/kernel.bin
+  make iso        → builds build/os.iso (requires grub + xorriso)
+
+RUN (QEMU)
+----------
+  qemu-system-i386 -kernel build/kernel.bin
+  qemu-system-i386 -cdrom build/os.iso
